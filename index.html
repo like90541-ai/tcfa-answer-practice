@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <title>TCFA 傑出店長應答練習室</title>
 <style>
   :root {
@@ -940,6 +943,255 @@
     margin-top: 10px;
   }
 
+
+  .versionBadge {
+    display: inline-flex;
+    margin-top: 10px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.28);
+    color: rgba(255,255,255,.94);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+
+  /* ===== 手機一步一頁流程版 ===== */
+  .mobileWizardTop {
+    display: none;
+  }
+  .mobileStepTitle {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    border-radius: 999px;
+    background: #eaf0ea;
+    color: #526762;
+    font-weight: 900;
+    font-size: 14px;
+    border: 1px solid #d4ded7;
+    text-align: center;
+    padding: 0 10px;
+  }
+  .mobileWizardTop button {
+    min-height: 40px;
+    white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    header {
+      padding: 14px 0 10px;
+    }
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .subtitle,
+    .heroPanel,
+    .filters .notice,
+    .filters .footerNote {
+      display: none !important;
+    }
+    .versionBadge {
+      font-size: 11px;
+      line-height: 1.45;
+      border-radius: 12px;
+      padding: 6px 8px;
+      margin-top: 8px;
+    }
+    .heroStats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .stat {
+      padding: 9px;
+    }
+    .stat .num {
+      font-size: 20px;
+    }
+    .stat .label {
+      font-size: 11px;
+    }
+    main {
+      padding: 10px 8px 30px;
+    }
+    .wrap.grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    body.step-select #questionCard {
+      display: none;
+    }
+    body.step-question header,
+    body.step-question .filters {
+      display: none !important;
+    }
+    body.step-question main {
+      padding: 0 0 24px;
+    }
+    body.step-question .wrap.grid {
+      width: 100%;
+      max-width: 100%;
+    }
+    body.step-question #questionCard {
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+    .mobileWizardTop {
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      background: #f4f6f1;
+      border-bottom: 1px solid #dbe2dc;
+    }
+    body.step-question .questionHead {
+      margin: 8px;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 18px rgba(54, 76, 72, .08);
+    }
+    body.step-question .questionBody {
+      margin: 8px;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      display: block;
+    }
+    body.step-question .questionHead .tags,
+    body.step-question .practiceMeta {
+      display: none;
+    }
+    body.step-question .question {
+      font-size: 20px;
+      line-height: 1.45;
+      margin: 0 0 10px;
+    }
+    body.step-question .follow,
+    body.step-question .lockedNotice {
+      font-size: 13px;
+      line-height: 1.55;
+      padding: 10px 11px;
+    }
+    body.step-question .tabs {
+      display: none !important;
+    }
+    body.step-question .box {
+      padding: 12px;
+      border-radius: 14px;
+    }
+    body.step-question .box h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    body.step-question textarea {
+      min-height: calc(100vh - 275px);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    body.step-question .btnRow button {
+      width: 100%;
+      flex: 1 1 100%;
+    }
+    body.step-question .answerReview .small,
+    body.step-question #pane-compare .judgeBox,
+    body.step-question #pane-compare .revealPanel,
+    body.step-question #pane-guide .guidanceBlocks,
+    body.step-question #pane-guide .conceptBox,
+    body.step-question #pane-skeleton .skeletonWhw,
+    body.step-question #pane-skeleton .sentenceBox {
+      display: none !important;
+    }
+    body.step-question .reviewGrid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    body.step-question .answerSnapshot {
+      min-height: 118px;
+      max-height: 28vh;
+      padding: 12px;
+      line-height: 1.6;
+    }
+    body.step-question .checklist {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    body.step-question .checkItem {
+      min-height: 46px;
+      padding: 10px;
+    }
+    body.step-question .checkItem span {
+      font-size: 14px;
+    }
+    body.step-question .mobileStepTip {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    body.step-question .mobileFlow {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    body.step-question .mobileFlow button {
+      width: 100%;
+      flex: 1 1 100%;
+      min-height: 44px;
+    }
+    body.step-question #pane-guide .keywordBlocks {
+      display: block;
+    }
+    body.step-question #pane-guide .keywordOnlyBox {
+      min-height: calc(100vh - 260px);
+    }
+    body.step-question .keywordCloud {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+    body.step-question .keywordChip {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      padding: 13px 12px;
+      font-size: 15px;
+      border-radius: 14px;
+    }
+    body.step-question .copyKeywordsBtn {
+      width: 100%;
+      min-height: 46px;
+      margin-top: 12px;
+    }
+    body.step-question #pane-skeleton .formatSteps li,
+    body.step-question #pane-skeleton ol li {
+      line-height: 1.62;
+      margin-bottom: 8px;
+    }
+    body.step-question #pane-skeleton .notice {
+      font-size: 13px;
+      line-height: 1.55;
+    }
+  }
+
   @media print {
     header, .filters, .btnRow, .tabs button, .footerNote { display: none !important; }
     body { background: #fffdf7; }
@@ -956,6 +1208,7 @@
       <div class="subtitle">
         課堂自學用：依 WHY YOU、HOW YOU、WHAT YOU 的口語培訓邏輯，先完成初稿，再用原答對照檢視回答面向、評審視角與補強資料，協助店長把歷程、作為與成果說清楚。
       </div>
+      <div class="versionBadge">版本：115/06/15 手機步驟分頁版｜完整題庫 83 題｜快問版 24 題｜關鍵字可複製</div>
       <div class="heroStats">
         <div class="stat"><div class="num" id="statTotal">83</div><div class="label">總題數</div></div>
         <div class="stat"><div class="num" id="statFast">24</div><div class="label">快問題</div></div>
@@ -1072,6 +1325,39 @@ function doneKey(qid) { return "tcfa_done_" + qid; }
 function checkKey(qid) { return "tcfa_checks_" + qid; }
 function revealKey(qid) { return "tcfa_reveal_" + qid; }
 
+
+function updateWizardBody() {
+  const hasQuestion = !!state.current;
+  document.body.classList.toggle("step-question", hasQuestion);
+  document.body.classList.toggle("step-select", !hasQuestion);
+}
+
+function showSelectionPage(message) {
+  state.current = null;
+  state.currentIndex = -1;
+  state.activePane = "answer";
+  const card = qs("questionCard");
+  if (card) {
+    card.innerHTML = `<div class="empty">${message || "請先在選題頁設定條件，按「隨機抽題」開始練習。"}</div>`;
+  }
+  updateWizardBody();
+  requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+function getMobileStepInfo(activePane, revealed) {
+  if (!revealed) {
+    return { title: "步驟 2／5｜作答", nextPane: "", nextLabel: "" };
+  }
+  const map = {
+    answer: { title: "步驟 2／5｜作答", nextPane: "compare", nextLabel: "下一頁：對應勾選" },
+    compare: { title: "步驟 3／5｜對應勾選", nextPane: "guide", nextLabel: "下一頁：查找關鍵字" },
+    guide: { title: "步驟 4／5｜查找關鍵字", nextPane: "skeleton", nextLabel: "下一頁：回答骨架" },
+    skeleton: { title: "步驟 5／5｜回答骨架", nextPane: "answer", nextLabel: "回到作答修正" }
+  };
+  return map[activePane] || map.answer;
+}
+
+
 function questionsByMode() {
   const mode = qs("mode").value;
   return DATA.questions.filter(q => {
@@ -1171,7 +1457,7 @@ function init() {
     qs("priority").value = "";
     refreshFilterOptions();
     buildPool();
-    renderCurrentFromPool();
+    showSelectionPage("條件已更新，請按「隨機抽題」開始練習。");
   });
 
   qs("scenario").addEventListener("change", () => {
@@ -1179,7 +1465,7 @@ function init() {
     qs("priority").value = "";
     refreshPriorityOptions();
     buildPool();
-    renderCurrentFromPool();
+    showSelectionPage("條件已更新，請按「隨機抽題」開始練習。");
   });
 
   qs("topic").addEventListener("change", () => {
@@ -1187,12 +1473,12 @@ function init() {
     qs("priority").value = "";
     refreshPriorityOptions();
     buildPool();
-    renderCurrentFromPool();
+    showSelectionPage("條件已更新，請按「隨機抽題」開始練習。");
   });
 
   qs("priority").addEventListener("change", () => {
     buildPool();
-    renderCurrentFromPool();
+    showSelectionPage("條件已更新，請按「隨機抽題」開始練習。");
   });
 
   qs("drawBtn").addEventListener("click", drawRandom);
@@ -1205,11 +1491,12 @@ function init() {
     qs("priority").value = "";
     refreshFilterOptions();
     buildPool();
-    renderCurrentFromPool();
+    showSelectionPage("已清除條件，請重新選題或按「隨機抽題」。");
   });
 
   buildPool();
   updateDoneStats();
+  updateWizardBody();
 }
 
 function buildPool() {
@@ -1227,8 +1514,7 @@ function buildPool() {
 
 function renderCurrentFromPool() {
   if (state.pool.length === 0) {
-    qs("questionCard").innerHTML = `<div class="empty">目前條件沒有符合題目，請放寬篩選條件。</div>`;
-    state.current = null;
+    showSelectionPage("目前條件沒有符合題目，請放寬篩選條件。");
     return;
   }
   state.currentIndex = 0;
@@ -1240,7 +1526,7 @@ function renderCurrentFromPool() {
 function drawRandom() {
   buildPool();
   if (!state.pool.length) {
-    qs("questionCard").innerHTML = `<div class="empty">目前條件沒有符合題目，請放寬篩選條件。</div>`;
+    showSelectionPage("目前條件沒有符合題目，請放寬篩選條件。");
     return;
   }
   state.currentIndex = Math.floor(Math.random() * state.pool.length);
@@ -1912,26 +2198,35 @@ function getAnswerFormat(q, whyHowWhat) {
 
 
 async function copyTextToClipboard(text, successMessage) {
+  const value = String(text || "");
   try {
-    await navigator.clipboard.writeText(text);
-    if (successMessage) console.log(successMessage);
-    return true;
-  } catch (e) {
-    try {
-      const temp = document.createElement("textarea");
-      temp.value = text;
-      temp.style.position = "fixed";
-      temp.style.left = "-9999px";
-      document.body.appendChild(temp);
-      temp.focus();
-      temp.select();
-      const ok = document.execCommand("copy");
-      document.body.removeChild(temp);
-      return ok;
-    } catch (err) {
-      return false;
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(value);
+      if (successMessage) console.log(successMessage);
+      return true;
     }
-  }
+  } catch (e) {}
+
+  try {
+    const temp = document.createElement("textarea");
+    temp.value = value;
+    temp.setAttribute("readonly", "");
+    temp.style.position = "fixed";
+    temp.style.top = "0";
+    temp.style.left = "0";
+    temp.style.opacity = "0";
+    temp.style.pointerEvents = "none";
+    document.body.appendChild(temp);
+    temp.focus();
+    temp.select();
+    temp.setSelectionRange(0, temp.value.length);
+    const ok = document.execCommand("copy");
+    document.body.removeChild(temp);
+    if (ok) return true;
+  } catch (err) {}
+
+  window.prompt("瀏覽器未允許自動複製，請手動複製以下內容：", value);
+  return false;
 }
 
 function flashKeywordChip(chip, copiedText) {
@@ -1946,6 +2241,8 @@ function flashKeywordChip(chip, copiedText) {
 }
 
 function renderQuestion(q) {
+  state.current = q;
+  updateWizardBody();
   const answer = localStorage.getItem(storageKey(q.id)) || "";
   const checks = JSON.parse(localStorage.getItem(checkKey(q.id)) || "[]");
   const done = localStorage.getItem(doneKey(q.id)) === "1";
@@ -1964,6 +2261,14 @@ function renderQuestion(q) {
   const focusedGuidance = getFocusedGuidance(q);
   const whyHowWhat = getWhyHowWhat(q);
   const answerFormat = getAnswerFormat(q, whyHowWhat);
+  const mobileStep = getMobileStepInfo(state.activePane, revealed);
+  const mobileWizardHtml = `
+    <div class="mobileWizardTop">
+      <button type="button" class="secondary" id="backToSelectBtn">← 選題</button>
+      <div class="mobileStepTitle">${safe(mobileStep.title)}</div>
+      ${mobileStep.nextPane ? `<button type="button" data-mobile-pane="${mobileStep.nextPane}">${safe(mobileStep.nextLabel)}</button>` : ""}
+    </div>
+  `;
 
   const tagHtml = [
     `<span class="tag blue">${safe(q.id)}</span>`,
@@ -1980,9 +2285,9 @@ function renderQuestion(q) {
 
   const tabsHtml = revealed ? `
       <div class="tabs">
-        <button class="tab ${state.activePane === "answer" ? "active" : ""}" data-pane="answer">回到作答</button>
-        <button class="tab ${state.activePane === "compare" ? "active" : ""}" data-pane="compare">原答對照</button>
-        <button class="tab ${state.activePane === "guide" ? "active" : ""}" data-pane="guide">資料補強</button>
+        <button class="tab ${state.activePane === "answer" ? "active" : ""}" data-pane="answer">作答</button>
+        <button class="tab ${state.activePane === "compare" ? "active" : ""}" data-pane="compare">對應勾選</button>
+        <button class="tab ${state.activePane === "guide" ? "active" : ""}" data-pane="guide">查找關鍵字</button>
         <button class="tab ${state.activePane === "skeleton" ? "active" : ""}" data-pane="skeleton">回答骨架</button>
       </div>` : "";
 
@@ -2022,7 +2327,7 @@ function renderQuestion(q) {
 
   const revealPanes = revealed ? `
       <div class="pane ${state.activePane === "compare" ? "active" : ""}" id="pane-compare">
-        <div class="mobileStepTip">手機版第 1 步：先看自己的原始回答，再往下對照已說到的面向。</div>
+        <div class="mobileStepTip">本頁只做一件事：看自己的原回答，勾選已經有說到的面向。</div>
         <div class="reviewGrid">
           <div class="box answerReview">
             <h3>原始作答｜剛剛的回答</h3>
@@ -2081,8 +2386,8 @@ function renderQuestion(q) {
       </div>
 
       <div class="pane ${state.activePane === "guide" ? "active" : ""}" id="pane-guide">
-        <div class="mobileStepTip">手機版第 2 步：本頁只顯示「當題型」需要補的資料來源，優先補數字、案例與前後差異。</div>
-        <div class="twoCol">
+        <div class="mobileStepTip">本頁只做一件事：複製 1–2 組關鍵字去查資料，不要一次查太多。</div>
+        <div class="twoCol guidanceBlocks">
           ${focusedGuidance.map(g => `
             <div class="box">
               <h3>${safe(g.title)}</h3>
@@ -2091,8 +2396,8 @@ function renderQuestion(q) {
           `).join("")}
         </div>
 
-        <div class="twoCol">
-          <div class="box">
+        <div class="twoCol keywordBlocks">
+          <div class="box keywordOnlyBox">
             <h3>建議上網查找關鍵字</h3>
             <div class="keywordCloud">
               ${learningBoosters.keywords.map(k => `<span class="keywordChip" role="button" tabindex="0" data-keyword="${safe(k)}" title="點擊複製關鍵字">${safe(k)}</span>`).join("")}
@@ -2100,7 +2405,7 @@ function renderQuestion(q) {
             <button type="button" class="secondary copyKeywordsBtn" id="copyKeywordsBtn">複製全部關鍵字</button>
             <div class="small" style="margin-top:10px;">可點選單一關鍵字複製；建議用 1–2 組關鍵字查資料即可，查到資料後只摘取能補強本題的觀點，再轉回自己的門市案例。</div>
           </div>
-          <div class="box">
+          <div class="box conceptBox">
             <h3>可對應管理學概念</h3>
             <div class="conceptGrid">
               ${learningBoosters.concepts.map(c => `<div class="conceptItem"><b>${safe(c[0])}</b><br>${safe(c[1])}</div>`).join("")}
@@ -2115,8 +2420,8 @@ function renderQuestion(q) {
       </div>
 
       <div class="pane ${state.activePane === "skeleton" ? "active" : ""}" id="pane-skeleton">
-        <div class="mobileStepTip">手機版第 3 步：用骨架整理歷程與成果，不要背稿，只補缺口。</div>
-        <div class="box whwBox">
+        <div class="mobileStepTip">本頁只做一件事：用骨架把回答整理成可說出口的版本。</div>
+        <div class="box whwBox skeletonWhw">
           <h3>口語培訓主軸｜WHY YOU → HOW YOU → WHAT YOU</h3>
           <div class="whwGrid">
             <div class="whwItem"><b>WHY YOU</b><span>你為什麼會進入這個工作？可談成長背景、學經歷、職涯歷程、企業認同、興趣與專長。</span></div>
@@ -2143,7 +2448,7 @@ function renderQuestion(q) {
             請不要背稿。骨架的用途是幫你把自己的真實歷程、管理行動與成果，整理成評審聽得懂、記得住的店長價值。
           </div>
         </div>
-        <div class="box">
+        <div class="box sentenceBox">
           <h3>依本題面向產生的句型｜${safe(sentencePatterns.title)}</h3>
           <ul class="listCompact">
             ${sentencePatterns.lines.map(item => `<li>${safe(item)}</li>`).join("")}
@@ -2159,6 +2464,7 @@ function renderQuestion(q) {
       </div>` : "";
 
   qs("questionCard").innerHTML = `
+    ${mobileWizardHtml}
     <div class="questionHead">
       <div class="tags">${tagHtml}</div>
       <h2 class="question">${safe(q.question)}</h2>
@@ -2197,6 +2503,13 @@ function renderQuestion(q) {
       renderQuestion(q);
     });
   });
+
+  const backToSelectBtn = qs("backToSelectBtn");
+  if (backToSelectBtn) {
+    backToSelectBtn.addEventListener("click", () => {
+      showSelectionPage("已回到選題頁，請重新選題或按「隨機抽題」。");
+    });
+  }
 
   document.querySelectorAll("[data-mobile-pane]").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -2285,12 +2598,10 @@ function renderQuestion(q) {
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
       const text = buildCopyText(q);
-      try {
-        await navigator.clipboard.writeText(text);
+      const ok = await copyTextToClipboard(text);
+      if (ok) {
         copyBtn.textContent = "已複製";
         setTimeout(() => copyBtn.textContent = "複製我的回答", 1200);
-      } catch(e) {
-        alert("瀏覽器未允許直接複製，請手動選取文字。");
       }
     });
   }
@@ -2398,6 +2709,21 @@ if (completedModal) {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeCompletedModal();
 });
+
+
+// 強制清除舊版快取，避免 GitHub Pages 或舊 PWA 版本卡住。
+(function clearOldTcfaCache(){
+  try {
+    if ("caches" in window) {
+      caches.keys().then(keys => keys.forEach(key => {
+        if (String(key).includes("tcfa") || String(key).includes("answer-practice")) caches.delete(key);
+      }));
+    }
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(reg => reg.update()));
+    }
+  } catch(e) {}
+})();
 
 window.addEventListener("DOMContentLoaded", init);
 </script>
