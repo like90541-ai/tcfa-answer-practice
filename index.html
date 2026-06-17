@@ -1186,6 +1186,11 @@
       line-height: 1.62;
       margin-bottom: 8px;
     }
+    body.step-question #pane-skeleton .formatSteps.readonlySteps li {
+      grid-template-columns: 32px 1fr;
+      padding: 9px 0 11px;
+      margin-bottom: 0;
+    }
     body.step-question #pane-skeleton .notice {
       font-size: 13px;
       line-height: 1.55;
@@ -1215,6 +1220,63 @@
     display: none !important;
   }
 
+
+  .formatBox.readonlyGuide {
+    background: #f8faf5;
+    border: 1px solid var(--line);
+  }
+  .formatSubnote {
+    margin-top: -2px;
+    margin-bottom: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .formatSteps.readonlySteps {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: grid;
+    gap: 8px;
+    counter-reset: stepCounter;
+  }
+  .formatSteps.readonlySteps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    align-items: start;
+    gap: 8px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 8px 0 10px;
+    line-height: 1.6;
+    border-bottom: 1px dashed #dbe2dc;
+  }
+  .formatSteps.readonlySteps li:last-child {
+    border-bottom: 0;
+  }
+  .formatSteps.readonlySteps li::before {
+    counter-increment: stepCounter;
+    content: counter(stepCounter);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e2ece7;
+    color: #5e746f;
+    font-size: 13px;
+    font-weight: 900;
+    border: 1px solid #cfddd7;
+    margin-top: 1px;
+  }
+  .formatSteps.readonlySteps li:hover {
+    transform: none;
+    cursor: default;
+  }
+
   @media print {
     header, .filters, .btnRow, .tabs button, .footerNote { display: none !important; }
     body { background: #fffdf7; }
@@ -1231,7 +1293,7 @@
       <div class="subtitle">
         課堂自學用：依 WHY YOU、HOW YOU、WHAT YOU 的口語培訓邏輯，先完成初稿，再用原答對照檢視回答面向、評審視角與補強資料，協助店長把歷程、作為與成果說清楚。
       </div>
-      <div class="versionBadge">版本：115/06/15 管理風格版｜完整題庫 96 題｜快問版 37 題｜選題情境 16 類</div>
+      <div class="versionBadge">版本：115/06/15 回答步驟提示版｜完整題庫 96 題｜快問版 37 題｜選題情境 16 類</div>
       <div class="heroStats">
         <div class="stat"><div class="num" id="statTotal">96</div><div class="label">總題數</div></div>
         <div class="stat"><div class="num" id="statFast">37</div><div class="label">快問題</div></div>
@@ -2484,11 +2546,12 @@ function renderQuestion(q) {
             ${safe(whyHowWhat.closing)}
           </div>
         </div>
-        <div class="box">
+        <div class="box formatBox readonlyGuide">
           <h3>本題建議回答形式｜${safe(answerFormat.type)}</h3>
+          <div class="formatSubnote">以下為回答順序提示，不需點選；請依序檢查自己的回答是否有說到。</div>
           <div class="small">${safe(answerFormat.reason)}</div>
-          <ul class="formatSteps">
-            ${answerFormat.steps.map(step => `<li>${safe(step)}</li>`).join("")}
+          <ul class="formatSteps readonlySteps">
+            ${answerFormat.steps.map(step => `<li><span>${safe(step)}</span></li>`).join("")}
           </ul>
         </div>
         <div class="box">
