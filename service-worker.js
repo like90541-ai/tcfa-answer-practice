@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tcfa-answer-practice-v20260615-step-guide';
+const CACHE_NAME = 'tcfa-answer-practice-v20260615-split-pools';
 const ASSETS = ['./index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (event) => {
@@ -27,6 +27,7 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
+
   event.respondWith(
     fetch(req).then(res => {
       const copy = res.clone();

@@ -1293,10 +1293,10 @@
       <div class="subtitle">
         課堂自學用：依 WHY YOU、HOW YOU、WHAT YOU 的口語培訓邏輯，先完成初稿，再用原答對照檢視回答面向、評審視角與補強資料，協助店長把歷程、作為與成果說清楚。
       </div>
-      <div class="versionBadge">版本：115/06/15 回答步驟提示版｜完整題庫 96 題｜快問版 37 題｜選題情境 16 類</div>
+      <div class="versionBadge">版本：115/06/15 雙題庫分流版｜深度練習 59 題｜評審快問 37 題｜合計 96 題</div>
       <div class="heroStats">
-        <div class="stat"><div class="num" id="statTotal">96</div><div class="label">總題數</div></div>
-        <div class="stat"><div class="num" id="statFast">37</div><div class="label">快問題</div></div>
+        <div class="stat"><div class="num" id="statTotal">96</div><div class="label">兩題庫合計</div></div>
+        <div class="stat"><div class="num" id="statFast">37</div><div class="label">評審快問題</div></div>
         <div class="stat"><div class="num" id="statTopic">16</div><div class="label">選題情境</div></div>
         <div class="stat clickableStat" id="completedStat" title="查看已完成題目與答案"><div class="num" id="statDone">0</div><div class="label">本機已完成題數｜點擊查看</div></div>
       </div>
@@ -1318,8 +1318,8 @@
       <div class="field">
         <label>練習模式</label>
         <select id="mode">
-          <option value="all" selected>完整題庫 96 題｜建議課堂使用</option>
-          <option value="fast">評審快問版 37 題｜快速練習</option>
+          <option value="deep" selected>深度練習題庫 59 題｜完整作答</option>
+          <option value="fast">評審快問題庫 37 題｜限時快答</option>
         </select>
       </div>
       <div class="field">
@@ -1340,7 +1340,7 @@
 
       <div class="filterCountBox" id="availableCount">
         目前可抽題：計算中
-        <span class="hint">快問版會自動鎖定 29 題內，不再另外用優先度篩選。</span>
+        <span class="hint">兩種模式題目不重複：深度練習 59 題＋評審快問 37 題＝共 96 題。</span>
       </div>
 
       <div class="btnRow" style="margin-bottom:14px;">
@@ -1352,7 +1352,7 @@
 
       <div class="notice">
         <b>建議使用方式</b><br>
-        先花 3–5 分鐘寫初稿；送出初稿後，手機會依步驟呈現：作答、對應勾選、查找關鍵字、回答骨架。選題時以「選題情境」為主，系統只會顯示目前模式下有題目的情境。
+        深度練習題庫適合完整作答；評審快問題庫適合限時快答。兩種模式題目不重複。送出初稿後，手機會依步驟呈現：作答、對應勾選、查找關鍵字、回答骨架。選題時以「選題情境」為主，系統只會顯示目前模式下有題目的情境。
       </div>
 
       <div class="footerNote">
@@ -1475,19 +1475,19 @@ function updateAvailableCount() {
   const box = qs("availableCount");
   if (!box) return;
   const count = getFilteredCount();
-  const modeText = isFastMode() ? "快問版" : "完整題庫";
+  const modeText = isFastMode() ? "評審快問題庫" : "深度練習題庫";
   const hint = isFastMode()
-    ? "快問版已自動鎖定快問題；可再用選題情境縮小範圍。"
-    : "可用選題情境與使用優先度縮小抽題範圍。";
+    ? "本模式為 37 題快問題，與深度練習題不重複；可再用選題情境縮小範圍。"
+    : "本模式為 59 題深度題，與快問題不重複；可用選題情境與使用優先度縮小範圍。";
   box.innerHTML = `目前可抽題：${count} 題｜${modeText}<span class="hint">${hint}</span>`;
 }
 
 
 function questionsByMode() {
-  return DATA.questions.filter(q => {
-    if (isFastMode() && !q.isFast) return false;
-    return true;
-  });
+  if (isFastMode()) {
+    return DATA.questions.filter(q => q.isFast);
+  }
+  return DATA.questions.filter(q => !q.isFast);
 }
 
 function countBy(items, keyFn) {
@@ -1601,7 +1601,7 @@ function init() {
   qs("prevBtn").addEventListener("click", () => move(-1));
   qs("nextBtn").addEventListener("click", () => move(1));
   qs("resetBtn").addEventListener("click", () => {
-    qs("mode").value = "all";
+    qs("mode").value = "deep";
     qs("scenario").value = "";
     qs("priority").value = "";
     refreshFilterOptions();
