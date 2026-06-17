@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tcfa-answer-practice-v20260615-mobile-step';
+const CACHE_NAME = 'tcfa-answer-practice-v20260615-talent-ai';
 const ASSETS = ['./index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (event) => {
