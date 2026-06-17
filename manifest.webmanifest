@@ -1,12 +1,10 @@
 {
   "name": "TCFA 傑出店長應答練習室",
-  "short_name": "TCFA 練習室",
-  "description": "店長自學用：先作答，再進行左右對照檢視與評審視角補強。",
-  "start_url": "./",
+  "short_name": "TCFA練習室",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f4f6f1",
   "theme_color": "#647d78",
-  "lang": "zh-Hant",
   "icons": [
     {
       "src": "./icon-192.png",

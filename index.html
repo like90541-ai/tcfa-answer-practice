@@ -1192,6 +1192,29 @@
     }
   }
 
+
+  .filterCountBox {
+    margin: -2px 0 12px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: #f0f4ed;
+    border: 1px solid var(--line);
+    color: var(--brand);
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .filterCountBox .hint {
+    display: block;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  .isHidden {
+    display: none !important;
+  }
+
   @media print {
     header, .filters, .btnRow, .tabs button, .footerNote { display: none !important; }
     body { background: #fffdf7; }
@@ -1208,7 +1231,7 @@
       <div class="subtitle">
         課堂自學用：依 WHY YOU、HOW YOU、WHAT YOU 的口語培訓邏輯，先完成初稿，再用原答對照檢視回答面向、評審視角與補強資料，協助店長把歷程、作為與成果說清楚。
       </div>
-      <div class="versionBadge">版本：115/06/15 人才留任×缺工AI版｜完整題庫 88 題｜快問版 29 題｜選題情境 15 類</div>
+      <div class="versionBadge">版本：115/06/15 快問篩選修正版｜完整題庫 88 題｜快問版 29 題｜選題情境 15 類</div>
       <div class="heroStats">
         <div class="stat"><div class="num" id="statTotal">88</div><div class="label">總題數</div></div>
         <div class="stat"><div class="num" id="statFast">29</div><div class="label">快問題</div></div>
@@ -1243,7 +1266,7 @@
           <option value="">全部情境</option>
         </select>
       </div>
-      <div class="field">
+      <div class="field" id="priorityField">
         <label>使用優先度</label>
         <select id="priority">
           <option value="">全部</option>
@@ -1251,6 +1274,11 @@
           <option value="中高">中高</option>
           <option value="中">中</option>
         </select>
+      </div>
+
+      <div class="filterCountBox" id="availableCount">
+        目前可抽題：計算中
+        <span class="hint">快問版會自動鎖定 29 題內，不再另外用優先度篩選。</span>
       </div>
 
       <div class="btnRow" style="margin-bottom:14px;">
@@ -1352,10 +1380,50 @@ function getMobileStepInfo(activePane, revealed) {
 }
 
 
+
+function isFastMode() {
+  const modeSelect = qs("mode");
+  return modeSelect && modeSelect.value === "fast";
+}
+
+function updateFilterUi() {
+  const priorityField = qs("priorityField");
+  const priority = qs("priority");
+  if (!priorityField || !priority) return;
+
+  if (isFastMode()) {
+    priority.value = "";
+    priorityField.classList.add("isHidden");
+  } else {
+    priorityField.classList.remove("isHidden");
+  }
+}
+
+function getFilteredCount() {
+  const scenario = qs("scenario") ? qs("scenario").value : "";
+  const priority = isFastMode() ? "" : (qs("priority") ? qs("priority").value : "");
+  return questionsByMode().filter(q => {
+    if (scenario && !(q.scenarios || []).includes(scenario)) return false;
+    if (priority && q.priority !== priority) return false;
+    return true;
+  }).length;
+}
+
+function updateAvailableCount() {
+  const box = qs("availableCount");
+  if (!box) return;
+  const count = getFilteredCount();
+  const modeText = isFastMode() ? "快問版" : "完整題庫";
+  const hint = isFastMode()
+    ? "快問版已自動鎖定快問題；可再用選題情境縮小範圍。"
+    : "可用選題情境與使用優先度縮小抽題範圍。";
+  box.innerHTML = `目前可抽題：${count} 題｜${modeText}<span class="hint">${hint}</span>`;
+}
+
+
 function questionsByMode() {
-  const mode = qs("mode").value;
   return DATA.questions.filter(q => {
-    if (mode === "fast" && !q.isFast) return false;
+    if (isFastMode() && !q.isFast) return false;
     return true;
   });
 }
@@ -1413,6 +1481,14 @@ function refreshFilterOptions() {
 }
 
 function refreshPriorityOptions(currentValue = qs("priority").value) {
+  updateFilterUi();
+
+  if (isFastMode()) {
+    if (qs("priority")) qs("priority").value = "";
+    updateAvailableCount();
+    return;
+  }
+
   const scenario = qs("scenario").value;
   const base = questionsByMode().filter(q => {
     if (scenario && !(q.scenarios || []).includes(scenario)) return false;
@@ -1426,6 +1502,7 @@ function refreshPriorityOptions(currentValue = qs("priority").value) {
     order.filter(x => priorityCounts.has(x)).map(x => [x, priorityCounts.get(x)]),
     currentValue
   );
+  updateAvailableCount();
 }
 
 function init() {
@@ -1434,11 +1511,14 @@ function init() {
   qs("statTopic").textContent = DATA.scenarios.length;
 
   refreshFilterOptions();
+  updateFilterUi();
+  updateAvailableCount();
 
   qs("mode").addEventListener("change", () => {
     qs("scenario").value = "";
     qs("priority").value = "";
     refreshFilterOptions();
+    updateFilterUi();
     buildPool();
     showSelectionPage("選題條件已更新，請按「隨機抽題」開始練習。");
   });
@@ -1474,13 +1554,14 @@ function init() {
 
 function buildPool() {
   const scenario = qs("scenario").value;
-  const priority = qs("priority").value;
+  const priority = isFastMode() ? "" : qs("priority").value;
   state.pool = questionsByMode().filter(q => {
     if (scenario && !(q.scenarios || []).includes(scenario)) return false;
     if (priority && q.priority !== priority) return false;
     return true;
   });
   state.currentIndex = Math.min(Math.max(0, state.currentIndex), state.pool.length - 1);
+  updateAvailableCount();
 }
 
 function renderCurrentFromPool() {
